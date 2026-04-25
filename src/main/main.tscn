@@ -3,6 +3,7 @@
 [ext_resource type="FontFile" uid="uid://dmctmxae86p4m" path="res://res/fonts/inter/Inter_18pt-Black.ttf" id="1_ab7mr"]
 [ext_resource type="FontFile" uid="uid://dx4nbhkc423nx" path="res://res/fonts/inter/Inter_18pt-MediumItalic.ttf" id="2_djufw"]
 [ext_resource type="PackedScene" uid="uid://c2pouvnanps5d" path="res://ast/models/city/city.blend" id="3_jkpqq"]
+[ext_resource type="PackedScene" uid="uid://bsy8kgmvg8pwq" path="res://ast/particles/fire_particles/fire_particles.tscn" id="4_djufw"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_h2yge"]
 sky_top_color = Color(0.53491765, 0.40394756, 0.47617275, 1)
@@ -136,6 +137,7 @@ color = Color(0, 0, 0, 1)
 
 [node name="startAnimation" type="AnimationPlayer" parent="startLayer" unique_id=279667492]
 libraries/ = SubResource("AnimationLibrary_0xm2m")
+autoplay = &"main"
 
 [node name="black" type="ColorRect" parent="startLayer" unique_id=2036346746]
 anchors_preset = 15
@@ -233,3 +235,9 @@ vertical_alignment = 1
 [node name="cinematicCam" type="Camera3D" parent="." unique_id=1049143499]
 transform = Transform3D(0.9656634, 0, -0.25979674, 0, 1, 0, 0.25979674, 0, 0.9656634, -7.575394, 0.8500502, -2.7154183)
 fov = 40.0
+
+[node name="FireParticles" parent="." unique_id=1075251460 instance=ExtResource("4_djufw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.4074984, 0, -18.287384)
+
+[node name="FireParticles2" parent="." unique_id=278691821 instance=ExtResource("4_djufw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.236472, 0, -12.838739)
