@@ -6,10 +6,9 @@ shader_type canvas_item;
 render_mode unshaded;
 
 /**
-	The input texture that will have the CRT effect applied to it.
-	This should be supplied by a subviewport texture rendered at a lower res.
+	The current screen texture that will have the CRT effect applied to it.
 	*/
-uniform sampler2D tex: filter_linear;
+uniform sampler2D screen_tex : hint_screen_texture, filter_linear;
 
 
 /**
@@ -95,7 +94,7 @@ vec3 srgb_to_linear(vec3 col)
 vec3 sample(vec2 uv)
 {
 	// Set coordinates to match texture dimensions
-	uv *= vec2(textureSize(tex, 0));
+	uv *= vec2(textureSize(screen_tex, 0));
 
 	// Vertical coordinate scanline samples
 	int y = int(uv.y + 0.5) - 1;
@@ -107,17 +106,17 @@ vec3 sample(vec2 uv)
 	float dx = x + 1.0;
 
 	// Sample the texture at various points
-	vec3 upper_a = texelFetch(tex, ivec2(int(ax), y), 0).rgb;
-	vec3 upper_b = texelFetch(tex, ivec2(int(x), y), 0).rgb;
-	vec3 upper_c = texelFetch(tex, ivec2(int(dx), y), 0).rgb;
+	vec3 upper_a = texelFetch(screen_tex, ivec2(int(ax), y), 0).rgb;
+	vec3 upper_b = texelFetch(screen_tex, ivec2(int(x), y), 0).rgb;
+	vec3 upper_c = texelFetch(screen_tex, ivec2(int(dx), y), 0).rgb;
 
 	// Adjust the vertical coordinate for the lower scanline
 	y += 1;
 
 	// Sample the texture at various points
-	vec3 lower_a = texelFetch(tex, ivec2(int(ax), y), 0).rgb;
-	vec3 lower_b = texelFetch(tex, ivec2(int(x), y), 0).rgb;
-	vec3 lower_c = texelFetch(tex, ivec2(int(dx), y), 0).rgb;
+	vec3 lower_a = texelFetch(screen_tex, ivec2(int(ax), y), 0).rgb;
+	vec3 lower_b = texelFetch(screen_tex, ivec2(int(x), y), 0).rgb;
+	vec3 lower_c = texelFetch(screen_tex, ivec2(int(dx), y), 0).rgb;
 
 	// Convert every sample to linear color
 	upper_a = srgb_to_linear(upper_a);
@@ -242,7 +241,7 @@ vec3 apply_mask(vec3 linear_color, vec2 fragcoord)
 void fragment()
 {
 	// Warp UV coordinates
-	vec2 warped_coords = warp(UV, aspect, curve);
+	vec2 warped_coords = warp(SCREEN_UV, aspect, curve);
 
 	// Sample color
 	vec3 col = sample(warped_coords);
