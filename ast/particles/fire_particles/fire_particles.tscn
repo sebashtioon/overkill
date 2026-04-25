@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://bsy8kgmvg8pwq"]
+[gd_scene format=3 uid="uid://bsy8kgmvg8pwq"]
 
 [sub_resource type="Gradient" id="Gradient_py7r6"]
 colors = PackedColorArray(1, 0, 0, 1, 1, 0.643137, 0, 1)
@@ -80,16 +80,16 @@ particles_anim_loop = false
 material = SubResource("StandardMaterial3D_fu4e1")
 size = Vector2(0.3, 0.3)
 
-[node name="FireParticles" type="Node3D"]
+[node name="FireParticles" type="Node3D" unique_id=200109767]
 
-[node name="Flame" type="GPUParticles3D" parent="."]
+[node name="Flame" type="GPUParticles3D" parent="." unique_id=1819840822]
 amount = 100
 lifetime = 1.2
 preprocess = 2.0
 process_material = SubResource("ParticleProcessMaterial_fu4e1")
 draw_pass_1 = SubResource("QuadMesh_fu4e1")
 
-[node name="Smoke" type="GPUParticles3D" parent="."]
+[node name="Smoke" type="GPUParticles3D" parent="." unique_id=1581910829]
 transform = Transform3D(2.705, 0, 0, 0, 2.705, 0, 0, 0, 2.705, 0, -0.138882, 0)
 amount = 40
 lifetime = 1.5
