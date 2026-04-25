@@ -1,3 +1,24 @@
 [gd_scene format=3 uid="uid://bm0uy7s1806bu"]
 
 [node name="main" type="Node3D" unique_id=2125052541]
+
+[node name="fadeLayer" type="CanvasLayer" parent="." unique_id=368950487]
+
+[node name="ColorRect" type="ColorRect" parent="fadeLayer" unique_id=1355834241]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="startLayer" type="CanvasLayer" parent="." unique_id=1922968913]
+
+[node name="black" type="ColorRect" parent="startLayer" unique_id=2036346746]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
