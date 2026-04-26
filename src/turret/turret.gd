@@ -2,6 +2,7 @@ extends Node3D
 
 @export var head: Node3D
 @export var camera: Camera3D
+@export var turret: MeshInstance3D
 
 @export var animation_player: AnimationPlayer
 @export var shootdebounce: Timer
@@ -23,6 +24,7 @@ func _input(event: InputEvent) -> void:
 
 func shoot() -> void:
 	animation_player.play(&"shoot")
+	shake_rot(2.0, 0.07)
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -57,6 +59,7 @@ func shake_rot(max_rot_deg : float = 2.0, duration : float = 0.25) -> void:
 	camera.rotation = start_rotation
 	is_shaking = false
 
+#
 
 func _on_shootdebounce_timeout() -> void:
 	if button_down:

@@ -2,19 +2,7 @@
 
 [ext_resource type="Script" uid="uid://co61epdghxefo" path="res://src/turret/turret.gd" id="1_82w8q"]
 [ext_resource type="Texture2D" uid="uid://cel25ovp4msb8" path="res://ast/textures/explosion.png" id="1_sabi0"]
-
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_82w8q"]
-sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
-ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
-
-[sub_resource type="Sky" id="Sky_w4lck"]
-sky_material = SubResource("ProceduralSkyMaterial_82w8q")
-
-[sub_resource type="Environment" id="Environment_xiuug"]
-background_mode = 2
-sky = SubResource("Sky_w4lck")
-tonemap_mode = 2
-glow_enabled = true
+[ext_resource type="Shader" uid="uid://bmggm0ws05824" path="res://res/shad/radblur.gdshader" id="3_w4lck"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ajrxd"]
 resource_name = "Material.010"
@@ -409,19 +397,19 @@ _data = {
 &"shoot": SubResource("Animation_2webm")
 }
 
-[node name="turret" type="Node3D" unique_id=1030040815 node_paths=PackedStringArray("head", "camera", "animation_player", "shootdebounce")]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xiuug"]
+shader = ExtResource("3_w4lck")
+shader_parameter/blur_center = Vector2(0.5, 0.5)
+shader_parameter/blur_power = 0.01
+shader_parameter/sampling_count = 6
+
+[node name="turret" type="Node3D" unique_id=1030040815 node_paths=PackedStringArray("head", "camera", "turret", "animation_player", "shootdebounce")]
 script = ExtResource("1_82w8q")
 head = NodePath("head")
 camera = NodePath("head/camera")
+turret = NodePath("head/camera/Armature/Skeleton3D/turret")
 animation_player = NodePath("AnimationPlayer")
 shootdebounce = NodePath("shootdebounce")
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=648705099]
-environment = SubResource("Environment_xiuug")
-
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=909515015]
-transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
-shadow_enabled = true
 
 [node name="shootdebounce" type="Timer" parent="." unique_id=1252195379]
 process_callback = 0
@@ -429,14 +417,15 @@ wait_time = 0.17
 one_shot = true
 
 [node name="head" type="Node3D" parent="." unique_id=2012504882]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.14271224, 5.7234845, -2.2841482)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.7858926, 1.9625223, 0.52159905)
 
 [node name="camera" type="Camera3D" parent="head" unique_id=616868929]
 transform = Transform3D(1, 0, 0, 0, 0.97317886, 0.23004973, 0, -0.23004973, 0.97317886, 0, 0, 0)
+current = true
 fov = 94.7
 
 [node name="Armature" type="Node3D" parent="head/camera" unique_id=1082129065]
-transform = Transform3D(-3.702558, 3.1504513e-07, 7.4299365e-08, -3.9178365e-16, 0.8498857, -3.6036968, -3.2368794e-07, -3.6036968, -0.8498857, 0.8884877, -2.7636712, -3.2602553)
+transform = Transform3D(-1, 1.509958e-07, -6.600236e-15, 3.4736544e-08, 0.23004968, -0.97317886, -1.4694592e-07, -0.97317886, -0.23004968, 0.24530733, -0.641721, -0.8097403)
 
 [node name="Skeleton3D" type="Skeleton3D" parent="head/camera/Armature" unique_id=1081927901]
 bones/0/name = "Bone"
@@ -493,14 +482,21 @@ bone_name = "Bone.003"
 bone_idx = 3
 
 [node name="explosion" type="Sprite3D" parent="head/camera/Armature/Skeleton3D/BoneAttachment3D" unique_id=786562621]
-transform = Transform3D(0.09, -2.0155737e-08, -2.3163517e-08, 2.0759007e-08, -0.01008529, 0.08943315, -2.2624466e-08, -0.08943315, -0.01008529, -3.7252903e-09, 0.5797552, -0.0153928995)
+transform = Transform3D(0.09, -2.0155756e-08, -2.3163425e-08, 2.0758913e-08, -0.010085247, 0.08943315, -2.2624448e-08, -0.08943315, -0.010085247, -3.7252903e-09, 0.5797552, -0.0153928995)
 visible = false
 texture = ExtResource("1_sabi0")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1736045972]
 libraries/ = SubResource("AnimationLibrary_rwq30")
 
-[node name="CSGBox3D" type="CSGBox3D" parent="." unique_id=2087635287]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 13.491802)
+[node name="blurlayer" type="CanvasLayer" parent="." unique_id=1854742618]
+
+[node name="blur" type="ColorRect" parent="blurlayer" unique_id=1522311679]
+material = SubResource("ShaderMaterial_xiuug")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [connection signal="timeout" from="shootdebounce" to="." method="_on_shootdebounce_timeout"]
