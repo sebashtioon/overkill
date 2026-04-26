@@ -125,10 +125,7 @@ func shake_rot(max_rot_deg : float = 2.0, duration : float = 0.25) -> void:
 	camera.rotation = start_rotation
 	is_shaking = false
 
-#
-
 func _on_shootdebounce_timeout() -> void:
-	# Timer timeout path is intentionally unused now.
 	_debug_shoot("timeout (ignored)")
 
 var in_ship_hitbox : bool = true
@@ -136,10 +133,8 @@ var shooting_at_ship : Node3D
 
 func _on_raycast_mimic_area_entered(area: Area3D) -> void:
 	if area.is_in_group(&"ship"):
-		print("skibdi")
-		shooting_at_ship = area.get_parent()
+		shooting_at_ship = area.get_parent().get_parent()
 
 func _on_raycast_mimic_area_exited(area: Area3D) -> void:
 	if area.is_in_group(&"ship"):
-		print("gahh")
 		shooting_at_ship = null
