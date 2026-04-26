@@ -35,11 +35,12 @@ func _unhandled_input(event: InputEvent) -> void:
 
 func _physics_process(delta: float) -> void:
 	#ww_handle_crouching(delta)
-	_handle_movement(delta)
-	_apply_head_bob(delta)
-	
-	_apply_gravity(delta)
-	move_and_slide()
+	if PlayerGlobal.can_move_player:
+		_handle_movement(delta)
+		_apply_head_bob(delta)
+		
+		_apply_gravity(delta)
+		move_and_slide()
 
 func _handle_mouse_look(mouse_relative: Vector2) -> void:
 	head.rotate_y(-mouse_relative.x * 0.001)
