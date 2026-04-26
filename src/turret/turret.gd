@@ -9,7 +9,6 @@ extends Node3D
 
 @export var animation_player: AnimationPlayer
 @export var shootdebounce: Timer
-@export var first_repeat_delay: float = 0.05
 
 @export var blur: ColorRect
 
@@ -19,25 +18,37 @@ var blur_tween : Tween
 var is_shaking : bool = false
 var button_down : bool = false
 
+
+func _ready() -> void:
+	if not animation_player.animation_started.is_connected(_on_animation_player_animation_started):
+		animation_player.animation_started.connect(_on_animation_player_animation_started)
+
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("shoot"):
 		button_down = true
 	
 		if shootdebounce.is_stopped():
 			shoot()
-			shootdebounce.start(first_repeat_delay)
+			shootdebounce.start()
 	elif event.is_action_released("shoot"):
 		button_down = false
 
 func shoot() -> void:
-	if blur_tween:
-		blur_tween.kill()
-	
-	blur_tween = get_tree().create_tween()
-	blur_tween.tween_property(turretblur, "shader_parameter/blur_power", 0.0, 0.1).from(0.05)
 	animation_player.play(&"shoot")
 	shake_rot(2.0, 0.07)
-	print("shot")
+
+
+func _on_animation_player_animation_started(anim_name: StringName) -> void:
+	if anim_name == &"shoot":
+		_play_shoot_blur()
+
+
+func _play_shoot_blur() -> void:
+	if blur_tween:
+		blur_tween.kill()
+
+	blur_tween = get_tree().create_tween()
+	blur_tween.tween_property(turretblur, "shader_parameter/blur_power", 0.0, 0.1).from(0.05)
 
 
 func _unhandled_input(event: InputEvent) -> void:
