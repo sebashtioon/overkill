@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://bo5ppryl0nkvn"
-path="res://.godot/imported/couch.blend-7134302d3fa53962150d4e5b7614874c.scn"
+path="res://.godot/imported/couch.blend-3c3c93f39f9a449c9008e84c6570e181.scn"
 
 [deps]
 
-source_file="res://ast/models/furniture/couch/couch.blend"
-dest_files=["res://.godot/imported/couch.blend-7134302d3fa53962150d4e5b7614874c.scn"]
+source_file="res://ast/models/couch/couch.blend"
+dest_files=["res://.godot/imported/couch.blend-3c3c93f39f9a449c9008e84c6570e181.scn"]
 
 [params]
 

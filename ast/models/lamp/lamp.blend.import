@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://d2wmpphgit0gr"
-path="res://.godot/imported/lamp.blend-c080b7b00d08079dd60a5f68932c5772.scn"
+path="res://.godot/imported/lamp.blend-b3fa39319761c9a3c779d413349e3186.scn"
 
 [deps]
 
-source_file="res://ast/models/furniture/lamp/lamp.blend"
-dest_files=["res://.godot/imported/lamp.blend-c080b7b00d08079dd60a5f68932c5772.scn"]
+source_file="res://ast/models/lamp/lamp.blend"
+dest_files=["res://.godot/imported/lamp.blend-b3fa39319761c9a3c779d413349e3186.scn"]
 
 [params]
 

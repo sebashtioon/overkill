@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://cfdyxhxdcvuqc"
-path="res://.godot/imported/light_switch.blend-b386060f71cfa3076bd9390acaf32175.scn"
+path="res://.godot/imported/light_switch.blend-3d9949d9b05624e3636acb6842cd1ce5.scn"
 
 [deps]
 
-source_file="res://ast/models/architectural/room lighting/light_switch.blend"
-dest_files=["res://.godot/imported/light_switch.blend-b386060f71cfa3076bd9390acaf32175.scn"]
+source_file="res://ast/models/room lighting/light_switch.blend"
+dest_files=["res://.godot/imported/light_switch.blend-3d9949d9b05624e3636acb6842cd1ce5.scn"]
 
 [params]
 
