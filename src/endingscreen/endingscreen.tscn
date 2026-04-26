@@ -36,15 +36,6 @@ title = NodePath("title")
 title_2 = NodePath("title2")
 endingcounter = NodePath("endingcounter")
 
-[node name="blackbg" type="ColorRect" parent="." unique_id=2054937767]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0, 0, 0, 1)
-
 [node name="title" type="Label" parent="." unique_id=480481588]
 layout_mode = 1
 anchors_preset = 8
@@ -157,6 +148,16 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_r0vnx")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_4cxgs")
 theme_override_styles/hover = SubResource("StyleBoxFlat_3mys4")
 text = "TITLE"
+
+[node name="blackoverlay" type="ColorRect" parent="." unique_id=2054937767]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
 
 [connection signal="pressed" from="btncontainer/quitbtn" to="." method="_on_quitbtn_pressed"]
 [connection signal="pressed" from="btncontainer/againbtn" to="." method="_on_againbtn_pressed"]

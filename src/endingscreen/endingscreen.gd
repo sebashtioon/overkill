@@ -33,4 +33,6 @@ func _on_againbtn_pressed() -> void:
 
 
 func _on_titlebtn_pressed() -> void:
-	pass # Replace with function body.
+	$blackoverlay.show()
+	await get_tree().create_timer(2.0).timeout
+	get_tree().change_scene_to_file("res://src/title/title.tscn")
