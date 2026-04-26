@@ -418,6 +418,7 @@ camera = NodePath("head/camera")
 turret = NodePath("head/camera/Armature/Skeleton3D/turret")
 animation_player = NodePath("AnimationPlayer")
 shootdebounce = NodePath("shootdebounce")
+debug_shooting = false
 blur = NodePath("blurlayer/blur")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1665624052]
@@ -429,7 +430,7 @@ shadow_enabled = true
 
 [node name="shootdebounce" type="Timer" parent="." unique_id=1252195379]
 process_callback = 0
-wait_time = 0.17
+wait_time = 0.1
 one_shot = true
 
 [node name="head" type="Node3D" parent="." unique_id=2012504882]
