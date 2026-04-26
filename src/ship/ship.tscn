@@ -890,9 +890,50 @@ shadow_mesh = SubResource("ArrayMesh_cw8xd")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_r6hs8"]
 
-[node name="ship" type="Node3D" unique_id=404981363 node_paths=PackedStringArray("healthbar")]
+[sub_resource type="Gradient" id="Gradient_py7r6"]
+colors = PackedColorArray(1, 0, 0, 1, 1, 0.643137, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_fu4e1"]
+gradient = SubResource("Gradient_py7r6")
+
+[sub_resource type="Curve" id="Curve_t11dk"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.512887, 0.548638), 0.0, 0.0, 0, 0, Vector2(0.987113, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_gqr5o"]
+curve = SubResource("Curve_t11dk")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_fu4e1"]
+emission_shape_scale = Vector3(2, 2, 2)
+emission_shape = 1
+emission_sphere_radius = 0.3
+spread = 0.0
+angular_velocity_min = -1.60933e-05
+angular_velocity_max = 90.0
+gravity = Vector3(0, 4, 0)
+scale_curve = SubResource("CurveTexture_gqr5o")
+color_ramp = SubResource("GradientTexture1D_fu4e1")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_py7r6"]
+blend_mode = 1
+depth_draw_mode = 1
+shading_mode = 0
+vertex_color_use_as_albedo = true
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_fu4e1"]
+material = SubResource("StandardMaterial3D_py7r6")
+size = Vector2(0.3, 0.3)
+
+[node name="ship" type="Node3D" unique_id=404981363 node_paths=PackedStringArray("healthbar", "shipbody", "fire")]
 script = ExtResource("1_r6hs8")
 healthbar = NodePath("SubViewport/main/healthbar")
+shipbody = NodePath("shipbody")
+fire = NodePath("shipbody/fire")
 
 [node name="healthbardisplay" type="Sprite3D" parent="." unique_id=1030472830]
 transform = Transform3D(5.965, 0, 0, 0, 5.965, 0, 0, 0, 5.965, 0, 4.3774486, 0.059242725)
@@ -1038,3 +1079,45 @@ mesh = SubResource("ArrayMesh_u00mp")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="shipbody" unique_id=1333682953]
 shape = SubResource("BoxShape3D_r6hs8")
+
+[node name="fire" type="Node3D" parent="shipbody" unique_id=1131035319]
+
+[node name="FireParticles" type="Node3D" parent="shipbody/fire" unique_id=200109767]
+transform = Transform3D(2.07, 0, 0, 0, 2.07, 0, 0, 0, 2.07, 1.8256111, -0.65374756, 3.9692755)
+
+[node name="Flame" type="GPUParticles3D" parent="shipbody/fire/FireParticles" unique_id=1819840822]
+amount = 230
+lifetime = 1.2
+preprocess = 2.0
+process_material = SubResource("ParticleProcessMaterial_fu4e1")
+draw_pass_1 = SubResource("QuadMesh_fu4e1")
+
+[node name="FireParticles2" type="Node3D" parent="shipbody/fire" unique_id=1770350944]
+transform = Transform3D(2.07, 0, 0, 0, 2.07, 0, 0, 0, 2.07, 0.6203847, -0.89462125, -2.5720258)
+
+[node name="Flame" type="GPUParticles3D" parent="shipbody/fire/FireParticles2" unique_id=806962000]
+amount = 230
+lifetime = 1.2
+preprocess = 2.0
+process_material = SubResource("ParticleProcessMaterial_fu4e1")
+draw_pass_1 = SubResource("QuadMesh_fu4e1")
+
+[node name="FireParticles3" type="Node3D" parent="shipbody/fire" unique_id=90321955]
+transform = Transform3D(2.07, 0, 0, 0, 2.07, 0, 0, 0, 14.775246, -0.86622906, -0.89462125, 0.029517531)
+
+[node name="Flame" type="GPUParticles3D" parent="shipbody/fire/FireParticles3" unique_id=206735717]
+amount = 230
+lifetime = 1.2
+preprocess = 2.0
+process_material = SubResource("ParticleProcessMaterial_fu4e1")
+draw_pass_1 = SubResource("QuadMesh_fu4e1")
+
+[node name="FireParticles4" type="Node3D" parent="shipbody/fire" unique_id=1993746274]
+transform = Transform3D(2.7144776e-07, 0, -2.7760878, 0, 2.07, 0, 2.0700002, 0, 3.640399e-07, -0.86622906, -1.1420869, 7.587889)
+
+[node name="Flame" type="GPUParticles3D" parent="shipbody/fire/FireParticles4" unique_id=1728489515]
+amount = 230
+lifetime = 1.2
+preprocess = 2.0
+process_material = SubResource("ParticleProcessMaterial_fu4e1")
+draw_pass_1 = SubResource("QuadMesh_fu4e1")
