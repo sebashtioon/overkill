@@ -53,7 +53,7 @@ func _physics_process(delta: float) -> void:
 	if not button_down:
 		return
 
-	var interval := max(shootdebounce.wait_time, 0.001)
+	var interval : float = max(shootdebounce.wait_time, 0.001)
 	_repeat_accum += delta
 
 	while _repeat_accum >= interval:
