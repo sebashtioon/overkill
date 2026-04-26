@@ -5,28 +5,24 @@ extends Node3D
 
 @export var animation_player: AnimationPlayer
 @export var shootdebounce: Timer
+@export var first_repeat_delay: float = 0.05
 
 
 var is_shaking : bool = false
 var button_down : bool = false
 
-var can_shoot : bool = true
-var shooting : bool = false
-
-func _input(_event: InputEvent) -> void:
-	if Input.is_action_pressed("shoot") and can_shoot:
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("shoot"):
 		button_down = true
-		shoot()
-	else:
+		# Fire immediately on press, then use a short first-repeat delay.
+		if shootdebounce.is_stopped():
+			shoot()
+			shootdebounce.start(first_repeat_delay)
+	elif event.is_action_released("shoot"):
 		button_down = false
-	
-	
-	#if Input.is_action_just_pressed("shoot") and can_shoot:
-		#shoot()
 
 func shoot() -> void:
 	animation_player.play(&"shoot")
-	shootdebounce.start()
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -65,3 +61,4 @@ func shake_rot(max_rot_deg : float = 2.0, duration : float = 0.25) -> void:
 func _on_shootdebounce_timeout() -> void:
 	if button_down:
 		shoot()
+		shootdebounce.start()
