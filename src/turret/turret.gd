@@ -9,7 +9,7 @@ extends Node3D
 
 @export var animation_player: AnimationPlayer
 @export var shootdebounce: Timer
-@export var debug_shooting: bool = false
+@export var debug_shooting: bool = true
 
 @export var blur: ColorRect
 
