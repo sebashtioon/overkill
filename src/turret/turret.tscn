@@ -2,7 +2,20 @@
 
 [ext_resource type="Script" uid="uid://co61epdghxefo" path="res://src/turret/turret.gd" id="1_82w8q"]
 [ext_resource type="Texture2D" uid="uid://cel25ovp4msb8" path="res://ast/textures/explosion.png" id="1_sabi0"]
-[ext_resource type="Shader" uid="uid://bmggm0ws05824" path="res://res/shad/radblur.gdshader" id="3_w4lck"]
+[ext_resource type="Material" uid="uid://draegn5j40iir" path="res://res/shad mat/turretblur.tres" id="3_w4lck"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_w4lck"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_xiuug"]
+sky_material = SubResource("ProceduralSkyMaterial_w4lck")
+
+[sub_resource type="Environment" id="Environment_u1wjr"]
+background_mode = 2
+sky = SubResource("Sky_xiuug")
+tonemap_mode = 2
+glow_enabled = true
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ajrxd"]
 resource_name = "Material.010"
@@ -397,19 +410,22 @@ _data = {
 &"shoot": SubResource("Animation_2webm")
 }
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_xiuug"]
-shader = ExtResource("3_w4lck")
-shader_parameter/blur_center = Vector2(0.5, 0.5)
-shader_parameter/blur_power = 0.01
-shader_parameter/sampling_count = 6
-
-[node name="turret" type="Node3D" unique_id=1030040815 node_paths=PackedStringArray("head", "camera", "turret", "animation_player", "shootdebounce")]
+[node name="turret" type="Node3D" unique_id=1030040815 node_paths=PackedStringArray("head", "camera", "turret", "animation_player", "shootdebounce", "blur")]
 script = ExtResource("1_82w8q")
+turretblur = ExtResource("3_w4lck")
 head = NodePath("head")
 camera = NodePath("head/camera")
 turret = NodePath("head/camera/Armature/Skeleton3D/turret")
 animation_player = NodePath("AnimationPlayer")
 shootdebounce = NodePath("shootdebounce")
+blur = NodePath("blurlayer/blur")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1665624052]
+environment = SubResource("Environment_u1wjr")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=747502658]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+shadow_enabled = true
 
 [node name="shootdebounce" type="Timer" parent="." unique_id=1252195379]
 process_callback = 0
@@ -490,9 +506,10 @@ texture = ExtResource("1_sabi0")
 libraries/ = SubResource("AnimationLibrary_rwq30")
 
 [node name="blurlayer" type="CanvasLayer" parent="." unique_id=1854742618]
+layer = 10
 
 [node name="blur" type="ColorRect" parent="blurlayer" unique_id=1522311679]
-material = SubResource("ShaderMaterial_xiuug")
+material = ExtResource("3_w4lck")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0

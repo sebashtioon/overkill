@@ -1,0 +1,9 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://draegn5j40iir"]
+
+[ext_resource type="Shader" uid="uid://bmggm0ws05824" path="res://res/shad/radblur.gdshader" id="1_tbbmf"]
+
+[resource]
+shader = ExtResource("1_tbbmf")
+shader_parameter/blur_center = Vector2(0.5, 0.5)
+shader_parameter/blur_power = 0.0
+shader_parameter/sampling_count = 6

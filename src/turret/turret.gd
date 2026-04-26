@@ -1,5 +1,8 @@
 extends Node3D
 
+@export var turretblur: ShaderMaterial
+
+
 @export var head: Node3D
 @export var camera: Camera3D
 @export var turret: MeshInstance3D
@@ -8,6 +11,10 @@ extends Node3D
 @export var shootdebounce: Timer
 @export var first_repeat_delay: float = 0.05
 
+@export var blur: ColorRect
+
+var blur_tween : Tween
+
 
 var is_shaking : bool = false
 var button_down : bool = false
@@ -15,7 +22,7 @@ var button_down : bool = false
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("shoot"):
 		button_down = true
-		# Fire immediately on press, then use a short first-repeat delay.
+	
 		if shootdebounce.is_stopped():
 			shoot()
 			shootdebounce.start(first_repeat_delay)
@@ -23,6 +30,11 @@ func _input(event: InputEvent) -> void:
 		button_down = false
 
 func shoot() -> void:
+	if blur_tween:
+		blur_tween.kill()
+	
+	blur_tween = get_tree().create_tween()
+	blur_tween.tween_property(turretblur, "shader_parameter/blur_power", 0.0, 0.1).from(0.05)
 	animation_player.play(&"shoot")
 	shake_rot(2.0, 0.07)
 
