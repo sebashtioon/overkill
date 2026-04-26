@@ -19,7 +19,8 @@ var blur_tween : Tween
 var is_shaking : bool = false
 var button_down : bool = false
 var _last_shot_ms : int = -1
-var _repeat_accum : float = 0.0
+var _repeat_tick_counter : int = 0
+var _repeat_ticks_per_shot : int = 1
 
 
 func _debug_shoot(message: String) -> void:
@@ -35,29 +36,28 @@ func _ready() -> void:
 		animation_player.animation_started.connect(_on_animation_player_animation_started)
 	# Repeat cadence is handled in _physics_process for deterministic stepping.
 	shootdebounce.stop()
+	_repeat_ticks_per_shot = max(1, int(round(shootdebounce.wait_time * Engine.physics_ticks_per_second)))
 	_debug_shoot("ready wait_time=" + str(shootdebounce.wait_time))
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("shoot") and not event.is_echo():
 		button_down = true
-		_repeat_accum = 0.0
+		_repeat_tick_counter = 0
 		_debug_shoot("press")
 		shoot("press")
 	elif event.is_action_released("shoot"):
 		button_down = false
-		_repeat_accum = 0.0
+		_repeat_tick_counter = 0
 		_debug_shoot("release")
 
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	if not button_down:
 		return
 
-	var interval : float = max(shootdebounce.wait_time, 0.001)
-	_repeat_accum += delta
-
-	while _repeat_accum >= interval:
-		_repeat_accum -= interval
+	_repeat_tick_counter += 1
+	if _repeat_tick_counter >= _repeat_ticks_per_shot:
+		_repeat_tick_counter = 0
 		shoot("physics")
 
 func shoot(source: String = "unknown") -> void:
