@@ -9,6 +9,7 @@ extends Node3D
 
 @export var animation_player: AnimationPlayer
 @export var shootdebounce: Timer
+@export var debug_shooting: bool = false
 
 @export var blur: ColorRect
 
@@ -17,23 +18,40 @@ var blur_tween : Tween
 
 var is_shaking : bool = false
 var button_down : bool = false
+var _last_shot_ms: int = -1
+
+
+func _debug_shoot(message: String) -> void:
+	if not debug_shooting:
+		return
+	var now := Time.get_ticks_msec()
+	var left := shootdebounce.time_left if shootdebounce else 0.0
+	print("[turret] ", now, "ms | ", message, " | down=", button_down, " stopped=", shootdebounce.is_stopped(), " left=", snapped(left, 0.001))
 
 
 func _ready() -> void:
 	if not animation_player.animation_started.is_connected(_on_animation_player_animation_started):
 		animation_player.animation_started.connect(_on_animation_player_animation_started)
+	_debug_shoot("ready wait_time=" + str(shootdebounce.wait_time))
 
 func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("shoot"):
+	if event.is_action_pressed("shoot") and not event.is_echo():
 		button_down = true
+		_debug_shoot("press")
 	
 		if shootdebounce.is_stopped():
-			shoot()
+			shoot("press")
 			shootdebounce.start()
+			_debug_shoot("timer start on press")
 	elif event.is_action_released("shoot"):
 		button_down = false
+		_debug_shoot("release")
 
-func shoot() -> void:
+func shoot(source: String = "unknown") -> void:
+	var now := Time.get_ticks_msec()
+	var dt_ms := now - _last_shot_ms if _last_shot_ms >= 0 else -1
+	_last_shot_ms = now
+	_debug_shoot("shoot source=" + source + " dt_ms=" + str(dt_ms))
 	animation_player.play(&"shoot")
 	shake_rot(2.0, 0.07)
 
@@ -86,6 +104,8 @@ func shake_rot(max_rot_deg : float = 2.0, duration : float = 0.25) -> void:
 #
 
 func _on_shootdebounce_timeout() -> void:
+	_debug_shoot("timeout")
 	if button_down:
-		shoot()
+		shoot("timeout")
 		shootdebounce.start()
+		_debug_shoot("timer restart on timeout")
