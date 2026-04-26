@@ -67,6 +67,8 @@ func shoot(source: String = "unknown") -> void:
 	_debug_shoot("shoot source=" + source + " dt_ms=" + str(dt_ms))
 	animation_player.play(&"shoot")
 	shake_rot(2.0, 0.07)
+	if shooting_at_ship:
+		shooting_at_ship.health -= 5
 
 
 func _on_animation_player_animation_started(anim_name: StringName) -> void:
@@ -121,11 +123,14 @@ func _on_shootdebounce_timeout() -> void:
 	_debug_shoot("timeout (ignored)")
 
 var in_ship_hitbox : bool = true
+var shooting_at_ship : Node3D
 
 func _on_raycast_mimic_area_entered(area: Area3D) -> void:
 	if area.is_in_group(&"ship"):
 		print("skibdi")
+		shooting_at_ship = area.get_parent()
 
 func _on_raycast_mimic_area_exited(area: Area3D) -> void:
 	if area.is_in_group(&"ship"):
 		print("gahh")
+		shooting_at_ship = null

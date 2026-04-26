@@ -2,6 +2,40 @@
 
 [ext_resource type="Script" uid="uid://dk84kgjs827kl" path="res://src/ship/ship.gd" id="1_r6hs8"]
 
+[sub_resource type="ViewportTexture" id="ViewportTexture_r6hs8"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r6hs8"]
+content_margin_left = 2.0
+content_margin_top = 2.0
+content_margin_right = 2.0
+content_margin_bottom = 2.0
+bg_color = Color(0.3106171, 0.31061712, 0.310617, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+corner_detail = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qhocr"]
+content_margin_left = 2.0
+content_margin_top = 2.0
+content_margin_right = 2.0
+content_margin_bottom = 2.0
+bg_color = Color(0.30980393, 1, 0.30980393, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_bottom = 3
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 15
+corner_radius_bottom_left = 15
+corner_detail = 6
+
 [sub_resource type="BoxShape3D" id="BoxShape3D_jydhg"]
 size = Vector3(8.8828125, 3.5448608, 19.24353)
 
@@ -854,8 +888,35 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_cw8xd")
 
-[node name="ship" type="Node3D" unique_id=404981363]
+[node name="ship" type="Node3D" unique_id=404981363 node_paths=PackedStringArray("healthbar")]
 script = ExtResource("1_r6hs8")
+healthbar = NodePath("SubViewport/main/healthbar")
+
+[node name="healthbardisplay" type="Sprite3D" parent="." unique_id=1030472830]
+transform = Transform3D(5.965, 0, 0, 0, 5.965, 0, 0, 0, 5.965, 0, 4.3774486, 0.059242725)
+billboard = 1
+texture = SubResource("ViewportTexture_r6hs8")
+
+[node name="SubViewport" type="SubViewport" parent="." unique_id=659457298]
+transparent_bg = true
+size = Vector2i(317, 37)
+
+[node name="main" type="Control" parent="SubViewport" unique_id=1493683890]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="healthbar" type="ProgressBar" parent="SubViewport/main" unique_id=827650917]
+layout_mode = 0
+offset_right = 317.0
+offset_bottom = 36.0
+theme_override_styles/background = SubResource("StyleBoxFlat_r6hs8")
+theme_override_styles/fill = SubResource("StyleBoxFlat_qhocr")
+value = 23.13
+show_percentage = false
 
 [node name="Hitbox" type="Area3D" parent="." unique_id=942135614 groups=["ship"]]
 
