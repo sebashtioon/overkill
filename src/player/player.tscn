@@ -13,12 +13,10 @@ size = Vector3(0.05, 0.05, 1.52554)
 [node name="player" type="CharacterBody3D" unique_id=838546913 node_paths=PackedStringArray("head", "camera", "mesh") groups=["PlayerBody"]]
 collision_layer = 2
 script = ExtResource("1_4anbu")
-fov = 65.0
-WALK_SPEED = 1.8
-BOB_AMP = 0.05
 head = NodePath("head")
 camera = NodePath("head/camera")
 mesh = NodePath("mesh")
+fov = 65.0
 
 [node name="mesh" type="MeshInstance3D" parent="." unique_id=2041292677]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)

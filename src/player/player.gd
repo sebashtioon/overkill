@@ -96,3 +96,6 @@ func _process(_delta: float) -> void:
 func _ready() -> void:
 	PlayerGlobal.player = self
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+
+func make_camera_current() -> void:
+	camera.make_current()
