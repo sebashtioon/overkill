@@ -3,22 +3,23 @@ extends Node3D
 @export var turretblur: ShaderMaterial
 
 
-@export var head: Node3D
-@export var camera: Camera3D
-@export var turret: MeshInstance3D
+@export var head : Node3D
+@export var camera : Camera3D
+@export var turret : MeshInstance3D
 
-@export var animation_player: AnimationPlayer
-@export var shootdebounce: Timer
-@export var debug_shooting: bool = true
+@export var animation_player : AnimationPlayer
+@export var shootdebounce : Timer
+@export var debug_shooting : bool = true
 
-@export var blur: ColorRect
+@export var blur : ColorRect
 
 var blur_tween : Tween
 
 
 var is_shaking : bool = false
 var button_down : bool = false
-var _last_shot_ms: int = -1
+var _last_shot_ms : int = -1
+var _repeat_accum : float = 0.0
 
 
 func _debug_shoot(message: String) -> void:
@@ -32,20 +33,32 @@ func _debug_shoot(message: String) -> void:
 func _ready() -> void:
 	if not animation_player.animation_started.is_connected(_on_animation_player_animation_started):
 		animation_player.animation_started.connect(_on_animation_player_animation_started)
+	# Repeat cadence is handled in _physics_process for deterministic stepping.
+	shootdebounce.stop()
 	_debug_shoot("ready wait_time=" + str(shootdebounce.wait_time))
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("shoot") and not event.is_echo():
 		button_down = true
+		_repeat_accum = 0.0
 		_debug_shoot("press")
-	
-		if shootdebounce.is_stopped():
-			shoot("press")
-			shootdebounce.start()
-			_debug_shoot("timer start on press")
+		shoot("press")
 	elif event.is_action_released("shoot"):
 		button_down = false
+		_repeat_accum = 0.0
 		_debug_shoot("release")
+
+
+func _physics_process(delta: float) -> void:
+	if not button_down:
+		return
+
+	var interval := max(shootdebounce.wait_time, 0.001)
+	_repeat_accum += delta
+
+	while _repeat_accum >= interval:
+		_repeat_accum -= interval
+		shoot("physics")
 
 func shoot(source: String = "unknown") -> void:
 	var now := Time.get_ticks_msec()
@@ -104,8 +117,5 @@ func shake_rot(max_rot_deg : float = 2.0, duration : float = 0.25) -> void:
 #
 
 func _on_shootdebounce_timeout() -> void:
-	_debug_shoot("timeout")
-	if button_down:
-		shoot("timeout")
-		shootdebounce.start()
-		_debug_shoot("timer restart on timeout")
+	# Timer timeout path is intentionally unused now.
+	_debug_shoot("timeout (ignored)")
