@@ -1,5 +1,7 @@
 [gd_scene format=4 uid="uid://cpd6vq6n04ptc"]
 
+[ext_resource type="Script" uid="uid://cpxvl72kuplcu" path="res://src/boss/boss.gd" id="1_3kou8"]
+
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_wr645"]
 load_path = "res://.godot/imported/boss_Bearded_man.png-3765a7042dfbf3f73c9e6a0a94438b59.s3tc.ctex"
 
@@ -723,6 +725,7 @@ bind/221/pose = Transform3D(0.76630574, 0.01193281, 0.6423652, 0.64236516, -0.03
 [sub_resource type="Animation" id="Animation_4ejqm"]
 resource_name = "rigAction_001"
 length = 7.4166665
+loop_mode = 1
 tracks/0/type = "position_3d"
 tracks/0/imported = true
 tracks/0/enabled = true
@@ -6036,7 +6039,9 @@ _data = {
 &"rigAction_005": SubResource("Animation_l2p8s")
 }
 
-[node name="boss" type="Node3D" unique_id=17745296]
+[node name="boss" type="Node3D" unique_id=17745296 node_paths=PackedStringArray("animation_player")]
+script = ExtResource("1_3kou8")
+animation_player = NodePath("AnimationPlayer")
 
 [node name="metarig" type="Node3D" parent="." unique_id=1602474592]
 
