@@ -375,7 +375,6 @@ tracks/0/keys = {
 [sub_resource type="Animation" id="Animation_2webm"]
 resource_name = "ArmatureAction"
 length = 0.17
-loop_mode = 1
 step = 0.001
 tracks/0/type = "position_3d"
 tracks/0/imported = true
@@ -398,10 +397,10 @@ tracks/2/path = NodePath("head/camera/Armature/Skeleton3D/BoneAttachment3D/explo
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.034),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0, 0.004, 0.034),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
-"values": [true, false]
+"values": [false, true, false]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_rwq30"]
@@ -410,10 +409,12 @@ _data = {
 &"shoot": SubResource("Animation_2webm")
 }
 
-[node name="turret" type="Node3D" unique_id=1030040815 node_paths=PackedStringArray("head", "camera")]
+[node name="turret" type="Node3D" unique_id=1030040815 node_paths=PackedStringArray("head", "camera", "animation_player", "shootdebounce")]
 script = ExtResource("1_82w8q")
 head = NodePath("head")
 camera = NodePath("head/camera")
+animation_player = NodePath("AnimationPlayer")
+shootdebounce = NodePath("shootdebounce")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=648705099]
 environment = SubResource("Environment_xiuug")
@@ -421,6 +422,11 @@ environment = SubResource("Environment_xiuug")
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=909515015]
 transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
 shadow_enabled = true
+
+[node name="shootdebounce" type="Timer" parent="." unique_id=1252195379]
+process_callback = 0
+wait_time = 0.17
+one_shot = true
 
 [node name="head" type="Node3D" parent="." unique_id=2012504882]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.14271224, 5.7234845, -2.2841482)
@@ -492,7 +498,8 @@ texture = ExtResource("1_sabi0")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1736045972]
 libraries/ = SubResource("AnimationLibrary_rwq30")
-autoplay = &"shoot"
 
 [node name="CSGBox3D" type="CSGBox3D" parent="." unique_id=2087635287]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 13.491802)
+
+[connection signal="timeout" from="shootdebounce" to="." method="_on_shootdebounce_timeout"]

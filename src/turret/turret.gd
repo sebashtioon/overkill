@@ -3,14 +3,31 @@ extends Node3D
 @export var head: Node3D
 @export var camera: Camera3D
 
+@export var animation_player: AnimationPlayer
+@export var shootdebounce: Timer
+
+
 var is_shaking : bool = false
 var button_down : bool = false
 
 var can_shoot : bool = true
+var shooting : bool = false
 
 func _input(_event: InputEvent) -> void:
 	if Input.is_action_pressed("shoot") and can_shoot:
 		button_down = true
+		shoot()
+	else:
+		button_down = false
+	
+	
+	#if Input.is_action_just_pressed("shoot") and can_shoot:
+		#shoot()
+
+func shoot() -> void:
+	animation_player.play(&"shoot")
+	shootdebounce.start()
+
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
@@ -20,7 +37,6 @@ func _handle_mouse_look(mouse_relative: Vector2) -> void:
 	head.rotate_y(-mouse_relative.x * 0.001)
 	camera.rotate_x(-mouse_relative.y * 0.001)
 	camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-90), deg_to_rad(90))
-
 
 
 func shake_rot(max_rot_deg : float = 2.0, duration : float = 0.25) -> void:
@@ -44,3 +60,8 @@ func shake_rot(max_rot_deg : float = 2.0, duration : float = 0.25) -> void:
 	
 	camera.rotation = start_rotation
 	is_shaking = false
+
+
+func _on_shootdebounce_timeout() -> void:
+	if button_down:
+		shoot()
