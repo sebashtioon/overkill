@@ -15,7 +15,11 @@ extends Node3D
 
 var blur_tween : Tween
 
-@export var can_shoot : bool = false
+@export var can_shoot : bool = false:
+	set(value):
+		can_shoot = value
+		if value:
+			print("shooting enabled")
 
 
 var is_shaking : bool = false
