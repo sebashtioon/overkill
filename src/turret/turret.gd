@@ -4,8 +4,13 @@ extends Node3D
 @export var camera: Camera3D
 
 var is_shaking : bool = false
+var button_down : bool = false
 
+var can_shoot : bool = true
 
+func _input(_event: InputEvent) -> void:
+	if Input.is_action_pressed("shoot") and can_shoot:
+		button_down = true
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
