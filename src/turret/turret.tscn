@@ -479,7 +479,7 @@ bone_name = "Bone.003"
 bone_idx = 3
 
 [node name="explosion" type="Sprite3D" parent="head/camera/Armature/Skeleton3D/BoneAttachment3D" unique_id=786562621]
-transform = Transform3D(0.09, -2.0155756e-08, -2.3163425e-08, 2.0758913e-08, -0.010085247, 0.08943315, -2.2624448e-08, -0.08943315, -0.010085247, -3.7252903e-09, 0.5797552, -0.0153928995)
+transform = Transform3D(0.15, -3.3592926e-08, -3.8605705e-08, 3.4598187e-08, -0.016808745, 0.14905526, -3.7707412e-08, -0.14905526, -0.016808745, -3.7252903e-09, 0.5797552, -0.0153928995)
 visible = false
 texture = ExtResource("1_sabi0")
 
