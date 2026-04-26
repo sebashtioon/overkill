@@ -119,3 +119,13 @@ func shake_rot(max_rot_deg : float = 2.0, duration : float = 0.25) -> void:
 func _on_shootdebounce_timeout() -> void:
 	# Timer timeout path is intentionally unused now.
 	_debug_shoot("timeout (ignored)")
+
+var in_ship_hitbox : bool = true
+
+func _on_raycast_mimic_area_entered(area: Area3D) -> void:
+	if area.is_in_group(&"ship"):
+		print("skibdi")
+
+func _on_raycast_mimic_area_exited(area: Area3D) -> void:
+	if area.is_in_group(&"ship"):
+		print("gahh")

@@ -526,6 +526,7 @@ visible = false
 texture = ExtResource("1_sabi0")
 
 [node name="RaycastMimic" type="Area3D" parent="head/camera" unique_id=416025658 groups=["raycast_mimic_turret"]]
+transform = Transform3D(1, 0, 0, 0, 0.9981615, 0.060612917, 0, -0.060612917, 0.9981615, 0, -0.5298666, -0.12525523)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="head/camera/RaycastMimic" unique_id=1227536100]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9.536743e-07, -25.983427)
@@ -566,3 +567,5 @@ process_material = SubResource("ParticleProcessMaterial_stbwc")
 draw_pass_1 = SubResource("QuadMesh_fu4e1")
 
 [connection signal="timeout" from="shootdebounce" to="." method="_on_shootdebounce_timeout"]
+[connection signal="area_entered" from="head/camera/RaycastMimic" to="." method="_on_raycast_mimic_area_entered"]
+[connection signal="area_exited" from="head/camera/RaycastMimic" to="." method="_on_raycast_mimic_area_exited"]
