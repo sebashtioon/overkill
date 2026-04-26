@@ -12,11 +12,11 @@ func _ready() -> void:
 		PlayerGlobal.found_good_ending = true
 	elif PlayerGlobal.got_ending == "BAD":
 		title.text = "BAD ENDING"
-		title_2.text = "you ran out of time and thus let The Machine take over the Earth."
+		title_2.text = "you ran out of time and thus let The Machine take over the Earth. nice one"
 		PlayerGlobal.found_bad_ending = true
 	elif PlayerGlobal.got_ending == "SECRET":
 		title.text = "SECRET ENDING"
-		title_2.text = "you killed your boss with the turret! calm down dude"
+		title_2.text = "you killed your boss with the turret! how could you???"
 		PlayerGlobal.found_secret_ending = true
 	
 	var endings_found := int(PlayerGlobal.found_good_ending)

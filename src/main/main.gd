@@ -5,8 +5,15 @@ extends Node3D
 @export var gametimer: Timer
 @export var turret: Node3D
 
+
+@export var timeleftbar: ProgressBar
+@export var timelefttext: Label
+
+
 @export var blackfade: ColorRect
 
+func _process(_delta: float) -> void:
+	timeleftbar.value = gametimer.time_left
 
 func _ready() -> void:
 	PlayerGlobal.world = self
@@ -14,9 +21,9 @@ func _ready() -> void:
 
 	#overkill.play(90.0)
 	
-	#cinematic_cam.make_current()
-	#var tween = get_tree().create_tween()
-	#tween.tween_property(overkill, "volume_db", 0, 3.0).from(-80.0)
+	cinematic_cam.make_current()
+	var tween = get_tree().create_tween()
+	tween.tween_property(overkill, "volume_db", 0, 3.0).from(-80.0)
 
 # shot all the ships in time
 func good_ending() -> void:
@@ -40,6 +47,8 @@ func secret_ending() -> void:
 	PlayerGlobal.found_secret_ending = true
 	gametimer.stop()
 	overkill.stop()
+	timeleftbar.hide()
+	timelefttext.hide()
 	await get_tree().create_timer(3.5).timeout
 	$hudLayer/whathaveyoudone.show()
 	await get_tree().create_timer(0.5).timeout
@@ -53,11 +62,13 @@ func _on_gametimer_timeout() -> void:
 
 func buss_it() -> void:
 	gametimer.start()
+	timeleftbar.show()
+	timelefttext.show()
 
 func gotoendingscreen() -> void:
 	var tween = get_tree().create_tween().set_parallel()
 	tween.connect("finished", gotoendingscreen_fadefinished)
-	tween.tween_property(overkill, "volume_db", -80.0, 2.0)
+	tween.tween_property(overkill, "volume_db", -40.0, 2.0)
 	tween.tween_property(blackfade, "modulate", Color(1, 1, 1, 1), 2.5)
 
 func gotoendingscreen_fadefinished() -> void:
