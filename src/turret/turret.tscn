@@ -1,6 +1,20 @@
 [gd_scene format=4 uid="uid://b7i8sx0xginf7"]
 
+[ext_resource type="Script" uid="uid://co61epdghxefo" path="res://src/turret/turret.gd" id="1_82w8q"]
 [ext_resource type="Texture2D" uid="uid://cel25ovp4msb8" path="res://ast/textures/explosion.png" id="1_sabi0"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_82w8q"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_w4lck"]
+sky_material = SubResource("ProceduralSkyMaterial_82w8q")
+
+[sub_resource type="Environment" id="Environment_xiuug"]
+background_mode = 2
+sky = SubResource("Sky_w4lck")
+tonemap_mode = 2
+glow_enabled = true
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ajrxd"]
 resource_name = "Material.010"
@@ -348,7 +362,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Armature/Skeleton3D/BoneAttachment3D/explosion:visible")
+tracks/0/path = NodePath("head/camera/Armature/Skeleton3D/BoneAttachment3D/explosion:visible")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -366,21 +380,21 @@ step = 0.001
 tracks/0/type = "position_3d"
 tracks/0/imported = true
 tracks/0/enabled = true
-tracks/0/path = NodePath("Armature/Skeleton3D:Bone")
+tracks/0/path = NodePath("head/camera/Armature/Skeleton3D:Bone")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = PackedFloat32Array(0, 1, 0.22976348, -0.24325675, -0.030601226, 0.033333335, 1, 0.22976348, -0.24325675, -0.030601226, 0.08066667, 1, 0.22976348, -0.29039326, -0.03060123, 0.114, 1, 0.22976348, -0.29039326, -0.03060123, 0.16666667, 1, 0.22976348, -0.24325675, -0.030601226)
 tracks/1/type = "rotation_3d"
 tracks/1/imported = true
 tracks/1/enabled = true
-tracks/1/path = NodePath("Armature/Skeleton3D:Bone")
+tracks/1/path = NodePath("head/camera/Armature/Skeleton3D:Bone")
 tracks/1/interp = 0
 tracks/1/loop_wrap = true
-tracks/1/keys = PackedFloat32Array(0, 1, -0.027822254, -1.1916314e-07, 3.3166736e-09, 0.9996129)
+tracks/1/keys = PackedFloat32Array(0.001, 1, -0.027822254, -1.1916314e-07, 3.3166736e-09, 0.9996129)
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Armature/Skeleton3D/BoneAttachment3D/explosion:visible")
+tracks/2/path = NodePath("head/camera/Armature/Skeleton3D/BoneAttachment3D/explosion:visible")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -396,23 +410,34 @@ _data = {
 &"shoot": SubResource("Animation_2webm")
 }
 
-[node name="turret" type="Node3D" unique_id=1030040815]
+[node name="turret" type="Node3D" unique_id=1030040815 node_paths=PackedStringArray("head", "camera")]
+script = ExtResource("1_82w8q")
+head = NodePath("head")
+camera = NodePath("head/camera")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=648705099]
+environment = SubResource("Environment_xiuug")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=909515015]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+shadow_enabled = true
 
 [node name="head" type="Node3D" parent="." unique_id=2012504882]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.14271224, 5.7234845, -2.2841482)
 
 [node name="camera" type="Camera3D" parent="head" unique_id=616868929]
-transform = Transform3D(-1, 0, -8.742278e-08, -2.0067036e-08, 0.9732992, 0.22954014, 8.5088516e-08, 0.22954014, -0.9732992, 0.20604062, 5.2779455, -2.0985045)
+transform = Transform3D(1, 0, 0, 0, 0.97317886, 0.23004973, 0, -0.23004973, 0.97317886, 0, 0, 0)
 fov = 94.7
 
-[node name="Armature" type="Node3D" parent="." unique_id=1082129065]
-transform = Transform3D(3.702558, 0, 0, 0, 0, -3.702558, 0, 3.702558, 0, -0.7457753, 2.2852461, 0.2546823)
+[node name="Armature" type="Node3D" parent="head/camera" unique_id=1082129065]
+transform = Transform3D(-3.702558, 3.1504513e-07, 7.4299365e-08, -3.9178365e-16, 0.8498857, -3.6036968, -3.2368794e-07, -3.6036968, -0.8498857, 0.8884877, -2.7636712, -3.2602553)
 
-[node name="Skeleton3D" type="Skeleton3D" parent="Armature" unique_id=1081927901]
+[node name="Skeleton3D" type="Skeleton3D" parent="head/camera/Armature" unique_id=1081927901]
 bones/0/name = "Bone"
 bones/0/parent = -1
 bones/0/rest = Transform3D(1, -5.356826e-15, -2.3841858e-07, 6.555202e-10, 0.99999624, 0.0027494286, 2.3841767e-07, -0.0027494286, 0.99999624, 0.22976351, -0.24325676, -0.030601216)
 bones/0/enabled = true
-bones/0/position = Vector3(0.22976348, -0.26442665, -0.030601228)
+bones/0/position = Vector3(0.22976348, -0.24325675, -0.030601226)
 bones/0/rotation = Quaternion(-0.027822254, -1.1916314e-07, 3.3166736e-09, 0.9996129)
 bones/0/scale = Vector3(1, 1, 1)
 bones/1/name = "Bone.001"
@@ -451,19 +476,23 @@ bones/5/position = Vector3(0, 0, 0)
 bones/5/rotation = Quaternion(-0.70710677, 0, 0, 0.70710677)
 bones/5/scale = Vector3(1, 1, 1)
 
-[node name="turret" type="MeshInstance3D" parent="Armature/Skeleton3D" unique_id=2041218187]
+[node name="turret" type="MeshInstance3D" parent="head/camera/Armature/Skeleton3D" unique_id=2041218187]
 mesh = SubResource("ArrayMesh_fmvlx")
 skin = SubResource("Skin_q2plu")
 skeleton = NodePath("..")
 
-[node name="BoneAttachment3D" type="BoneAttachment3D" parent="Armature/Skeleton3D" unique_id=2061180834]
-transform = Transform3D(1, -3.5527137e-15, -2.3841858e-07, -1.264984e-08, 0.99859136, -0.05305729, 2.3808276e-07, 0.053057287, 0.9985914, 0.22976348, 0.77937484, -0.08553376)
+[node name="BoneAttachment3D" type="BoneAttachment3D" parent="head/camera/Armature/Skeleton3D" unique_id=2061180834]
+transform = Transform3D(1, -3.5527137e-15, -2.3841858e-07, -1.264984e-08, 0.99859136, -0.05305729, 2.3808276e-07, 0.053057287, 0.9985914, 0.22976348, 0.80054474, -0.08553376)
 bone_name = "Bone.003"
 bone_idx = 3
 
-[node name="explosion" type="Sprite3D" parent="Armature/Skeleton3D/BoneAttachment3D" unique_id=786562621]
+[node name="explosion" type="Sprite3D" parent="head/camera/Armature/Skeleton3D/BoneAttachment3D" unique_id=786562621]
 transform = Transform3D(0.09, -2.0155737e-08, -2.3163517e-08, 2.0759007e-08, -0.01008529, 0.08943315, -2.2624466e-08, -0.08943315, -0.01008529, -3.7252903e-09, 0.5797552, -0.0153928995)
 texture = ExtResource("1_sabi0")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1736045972]
 libraries/ = SubResource("AnimationLibrary_rwq30")
+autoplay = &"shoot"
+
+[node name="CSGBox3D" type="CSGBox3D" parent="." unique_id=2087635287]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 13.491802)

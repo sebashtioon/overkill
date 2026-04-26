@@ -1,0 +1,16 @@
+extends Node3D
+
+@export var head: Node3D
+@export var camera: Camera3D
+
+
+
+
+func _unhandled_input(event: InputEvent) -> void:
+	if event is InputEventMouseMotion:
+		_handle_mouse_look(event.relative)
+
+func _handle_mouse_look(mouse_relative: Vector2) -> void:
+	head.rotate_y(-mouse_relative.x * 0.001)
+	camera.rotate_x(-mouse_relative.y * 0.001)
+	camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-90), deg_to_rad(90))
