@@ -1,5 +1,7 @@
 [gd_scene format=4 uid="uid://b7i8sx0xginf7"]
 
+[ext_resource type="Texture2D" uid="uid://cel25ovp4msb8" path="res://ast/textures/explosion.png" id="1_sabi0"]
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ajrxd"]
 resource_name = "Material.010"
 cull_mode = 2
@@ -341,16 +343,33 @@ bind/5/name = &"neutral_bone"
 bind/5/bone = -1
 bind/5/pose = Transform3D(0.27008355, 0, 0, 0, 0.27008355, -2.0390742e-08, 0, 2.0390742e-08, 0.27008355, 0.20142163, -0.61720735, -0.06878555)
 
+[sub_resource type="Animation" id="Animation_sabi0"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Armature/Skeleton3D/BoneAttachment3D/explosion:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
 [sub_resource type="Animation" id="Animation_2webm"]
 resource_name = "ArmatureAction"
-length = 0.125
+length = 0.17
+loop_mode = 1
+step = 0.001
 tracks/0/type = "position_3d"
 tracks/0/imported = true
 tracks/0/enabled = true
 tracks/0/path = NodePath("Armature/Skeleton3D:Bone")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
-tracks/0/keys = PackedFloat32Array(0, 1, 0.22976348, -0.24325675, -0.030601226, 0.033333335, 1, 0.22976348, -0.24325675, -0.030601226, 0.06666667, 1, 0.22976348, -0.29039326, -0.03060123, 0.1, 1, 0.22976348, -0.29039326, -0.03060123, 0.125, 1, 0.22976348, -0.24325675, -0.030601226)
+tracks/0/keys = PackedFloat32Array(0, 1, 0.22976348, -0.24325675, -0.030601226, 0.033333335, 1, 0.22976348, -0.24325675, -0.030601226, 0.08066667, 1, 0.22976348, -0.29039326, -0.03060123, 0.114, 1, 0.22976348, -0.29039326, -0.03060123, 0.16666667, 1, 0.22976348, -0.24325675, -0.030601226)
 tracks/1/type = "rotation_3d"
 tracks/1/imported = true
 tracks/1/enabled = true
@@ -358,13 +377,32 @@ tracks/1/path = NodePath("Armature/Skeleton3D:Bone")
 tracks/1/interp = 0
 tracks/1/loop_wrap = true
 tracks/1/keys = PackedFloat32Array(0, 1, -0.027822254, -1.1916314e-07, 3.3166736e-09, 0.9996129)
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Armature/Skeleton3D/BoneAttachment3D/explosion:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.034),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_rwq30"]
 _data = {
+&"RESET": SubResource("Animation_sabi0"),
 &"shoot": SubResource("Animation_2webm")
 }
 
-[node name="turret2" type="Node3D" unique_id=1030040815]
+[node name="turret" type="Node3D" unique_id=1030040815]
+
+[node name="head" type="Node3D" parent="." unique_id=2012504882]
+
+[node name="camera" type="Camera3D" parent="head" unique_id=616868929]
+transform = Transform3D(-1, 0, -8.742278e-08, -2.0067036e-08, 0.9732992, 0.22954014, 8.5088516e-08, 0.22954014, -0.9732992, 0.20604062, 5.2779455, -2.0985045)
+fov = 94.7
 
 [node name="Armature" type="Node3D" parent="." unique_id=1082129065]
 transform = Transform3D(3.702558, 0, 0, 0, 0, -3.702558, 0, 3.702558, 0, -0.7457753, 2.2852461, 0.2546823)
@@ -374,7 +412,7 @@ bones/0/name = "Bone"
 bones/0/parent = -1
 bones/0/rest = Transform3D(1, -5.356826e-15, -2.3841858e-07, 6.555202e-10, 0.99999624, 0.0027494286, 2.3841767e-07, -0.0027494286, 0.99999624, 0.22976351, -0.24325676, -0.030601216)
 bones/0/enabled = true
-bones/0/position = Vector3(0.22976348, -0.24325675, -0.030601226)
+bones/0/position = Vector3(0.22976348, -0.26442665, -0.030601228)
 bones/0/rotation = Quaternion(-0.027822254, -1.1916314e-07, 3.3166736e-09, 0.9996129)
 bones/0/scale = Vector3(1, 1, 1)
 bones/1/name = "Bone.001"
@@ -417,6 +455,15 @@ bones/5/scale = Vector3(1, 1, 1)
 mesh = SubResource("ArrayMesh_fmvlx")
 skin = SubResource("Skin_q2plu")
 skeleton = NodePath("..")
+
+[node name="BoneAttachment3D" type="BoneAttachment3D" parent="Armature/Skeleton3D" unique_id=2061180834]
+transform = Transform3D(1, -3.5527137e-15, -2.3841858e-07, -1.264984e-08, 0.99859136, -0.05305729, 2.3808276e-07, 0.053057287, 0.9985914, 0.22976348, 0.77937484, -0.08553376)
+bone_name = "Bone.003"
+bone_idx = 3
+
+[node name="explosion" type="Sprite3D" parent="Armature/Skeleton3D/BoneAttachment3D" unique_id=786562621]
+transform = Transform3D(0.09, -2.0155737e-08, -2.3163517e-08, 2.0759007e-08, -0.01008529, 0.08943315, -2.2624466e-08, -0.08943315, -0.01008529, -3.7252903e-09, 0.5797552, -0.0153928995)
+texture = ExtResource("1_sabi0")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1736045972]
 libraries/ = SubResource("AnimationLibrary_rwq30")
