@@ -3,6 +3,7 @@ extends Node3D
 @export var healthbar : ProgressBar
 @export var shipbody: CharacterBody3D
 @export var fire : Node3D
+@export var healthbardisplay: Sprite3D
 
 var health : float = 100.0
 var _fill_style:  StyleBoxFlat
@@ -13,7 +14,7 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	if health <= 0:
-		
+		healthbardisplay.visible = false
 		shipbody.velocity.y -= 9.8 * delta
 
 		shipbody.move_and_slide()
