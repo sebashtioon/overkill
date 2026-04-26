@@ -37,6 +37,7 @@ func shoot() -> void:
 	blur_tween.tween_property(turretblur, "shader_parameter/blur_power", 0.0, 0.1).from(0.05)
 	animation_player.play(&"shoot")
 	shake_rot(2.0, 0.07)
+	print("shot")
 
 
 func _unhandled_input(event: InputEvent) -> void:
