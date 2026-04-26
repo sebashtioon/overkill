@@ -1,9 +1,9 @@
 extends Node3D
 
-@export var healthbar: ProgressBar
+@export var healthbar : ProgressBar
 
 var health : float = 100.0
-var _fill_style: StyleBoxFlat
+var _fill_style:  StyleBoxFlat
 
 
 func _ready() -> void:
