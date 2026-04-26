@@ -68,7 +68,7 @@ func shoot(source: String = "unknown") -> void:
 	animation_player.play(&"shoot")
 	shake_rot(2.0, 0.07)
 	if shooting_at_ship:
-		shooting_at_ship.health -= 5
+		shooting_at_ship.health -= 3
 
 
 func _on_animation_player_animation_started(anim_name: StringName) -> void:

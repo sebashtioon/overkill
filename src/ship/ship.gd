@@ -18,7 +18,7 @@ func _process(_delta: float) -> void:
 	else:
 		healthbar.hide()
 	
-	if health < 30.0:
+	if health < 35.0:
 		_fill_style.bg_color = Color(1.0, 0.0, 0.31, 1.0)
 	elif health < 60.0:
 		_fill_style.bg_color = Color(1.0, 1.0, 0.31, 1.0)
