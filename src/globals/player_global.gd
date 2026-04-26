@@ -12,6 +12,10 @@ var got_ending : String
 # BAD
 # SECRET
 
+var found_good_ending : bool = false
+var found_bad_ending : bool = false
+var found_secret_ending : bool = false
+
 var ships_shot : int = 0:
 	set(value):
 		if ships_shot == 4:

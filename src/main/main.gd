@@ -18,15 +18,18 @@ func _ready() -> void:
 # shot all the ships in time
 func good_ending() -> void:
 	PlayerGlobal.got_ending = "GOOD"
+	PlayerGlobal.found_good_ending = true
 	gametimer.stop()
 
 # didn't shoot all ships in time
 func bad_ending() -> void:
 	PlayerGlobal.got_ending = "BAD"
+	PlayerGlobal.found_bad_ending = true
 
 # shot your boss
 func secret_ending() -> void:
 	PlayerGlobal.got_ending = "SECRET"
+	PlayerGlobal.found_secret_ending = true
 	gametimer.stop()
 	overkill.stop()
 

@@ -24,7 +24,7 @@ border_width_top = 1
 border_width_right = 1
 border_width_bottom = 1
 
-[node name="main" type="Control" unique_id=1530187099]
+[node name="main" type="Control" unique_id=1530187099 node_paths=PackedStringArray("title", "title_2", "endingcounter")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -32,6 +32,9 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_4hkk2")
+title = NodePath("title")
+title_2 = NodePath("title2")
+endingcounter = NodePath("endingcounter")
 
 [node name="blackbg" type="ColorRect" parent="." unique_id=2054937767]
 layout_mode = 1
@@ -50,9 +53,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -71.0
-offset_top = -46.5
+offset_top = -55.5
 offset_right = 71.0
-offset_bottom = -21.5
+offset_bottom = -30.5
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_fonts/font = ExtResource("2_r0vnx")
@@ -69,14 +72,33 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -162.0
-offset_top = -20.5
+offset_top = -29.5
 offset_right = 162.0
-offset_bottom = 4.5
+offset_bottom = -4.5
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_fonts/font = ExtResource("2_r0vnx")
 theme_override_font_sizes/font_size = 17
 text = "you saved humanity from The Machine!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="endingcounter" type="Label" parent="." unique_id=1950377521]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -86.5
+offset_top = -30.0
+offset_right = 86.5
+offset_bottom = -5.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("2_r0vnx")
+theme_override_font_sizes/font_size = 15
+text = "1/3 endings found"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -88,9 +110,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -89.5
-offset_top = 27.5
+offset_top = 2.5
 offset_right = 89.5
-offset_bottom = 58.5
+offset_bottom = 33.5
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -121,5 +143,21 @@ theme_override_styles/pressed = SubResource("StyleBoxFlat_4cxgs")
 theme_override_styles/hover = SubResource("StyleBoxFlat_3mys4")
 text = "AGAIN!"
 
+[node name="titlebtn" type="Button" parent="btncontainer" unique_id=1784557776]
+layout_mode = 0
+offset_left = 570.5
+offset_top = 293.5
+offset_right = 657.5
+offset_bottom = 315.5
+focus_mode = 0
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_r0vnx")
+theme_override_styles/normal = SubResource("StyleBoxFlat_r0vnx")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_4cxgs")
+theme_override_styles/hover = SubResource("StyleBoxFlat_3mys4")
+text = "TITLE"
+
 [connection signal="pressed" from="btncontainer/quitbtn" to="." method="_on_quitbtn_pressed"]
 [connection signal="pressed" from="btncontainer/againbtn" to="." method="_on_againbtn_pressed"]
+[connection signal="pressed" from="btncontainer/titlebtn" to="." method="_on_titlebtn_pressed"]
