@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://bsljbif1rji7e"]
 
 [ext_resource type="Script" uid="uid://c2p2m8pgho4nd" path="res://src/player/player.gd" id="1_4anbu"]
-[ext_resource type="Material" uid="uid://dfxc85kabcrgj" path="res://res/shad mat/buckshoteffect.tres" id="2_rxibo"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_e8ep2"]
 
@@ -14,12 +13,12 @@ size = Vector3(0.05, 0.05, 1.52554)
 [node name="player" type="CharacterBody3D" unique_id=838546913 node_paths=PackedStringArray("head", "camera", "mesh") groups=["PlayerBody"]]
 collision_layer = 2
 script = ExtResource("1_4anbu")
-head = NodePath("head")
-camera = NodePath("head/camera")
-mesh = NodePath("mesh")
 fov = 65.0
 WALK_SPEED = 1.8
 BOB_AMP = 0.05
+head = NodePath("head")
+camera = NodePath("head/camera")
+mesh = NodePath("mesh")
 
 [node name="mesh" type="MeshInstance3D" parent="." unique_id=2041292677]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -41,15 +40,3 @@ current = true
 [node name="CollisionShape3D" type="CollisionShape3D" parent="head/camera/RaycastMimic" unique_id=2090937215]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.737769)
 shape = SubResource("BoxShape3D_4anbu")
-
-[node name="effectlayer" type="CanvasLayer" parent="head/camera" unique_id=45059322]
-layer = 20
-
-[node name="buckshoteffect" type="ColorRect" parent="head/camera/effectlayer" unique_id=1057374478]
-material = ExtResource("2_rxibo")
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
