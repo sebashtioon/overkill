@@ -6,7 +6,7 @@ extends Node3D
 
 func _ready() -> void:
 	#overkill.play(45.0)
-	#cinematic_cam.make_current()
+	cinematic_cam.make_current()
 	overkill.play(90.0)
 	
 	#var tween = get_tree().create_tween()

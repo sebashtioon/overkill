@@ -15,6 +15,8 @@ extends Node3D
 
 var blur_tween : Tween
 
+@export var can_shoot : bool = false
+
 
 var is_shaking : bool = false
 var button_down : bool = false
@@ -30,6 +32,8 @@ func _debug_shoot(message: String) -> void:
 	var left := shootdebounce.time_left if shootdebounce else 0.0
 	print("[turret] ", now, "ms | ", message, " | down=", button_down, " stopped=", shootdebounce.is_stopped(), " left=", snapped(left, 0.001))
 
+func make_camera_current() -> void:
+	camera.make_current()
 
 func _ready() -> void:
 	if not animation_player.animation_started.is_connected(_on_animation_player_animation_started):
@@ -61,14 +65,15 @@ func _physics_process(_delta: float) -> void:
 		shoot("physics")
 
 func shoot(source: String = "unknown") -> void:
-	var now := Time.get_ticks_msec()
-	var dt_ms := now - _last_shot_ms if _last_shot_ms >= 0 else -1
-	_last_shot_ms = now
-	_debug_shoot("shoot source=" + source + " dt_ms=" + str(dt_ms))
-	animation_player.play(&"shoot")
-	shake_rot(2.0, 0.07)
-	if shooting_at_ship:
-		shooting_at_ship.health -= 3
+	if can_shoot:
+		var now := Time.get_ticks_msec()
+		var dt_ms := now - _last_shot_ms if _last_shot_ms >= 0 else -1
+		_last_shot_ms = now
+		_debug_shoot("shoot source=" + source + " dt_ms=" + str(dt_ms))
+		animation_player.play(&"shoot")
+		shake_rot(2.0, 0.07)
+		if shooting_at_ship:
+			shooting_at_ship.health -= 3
 
 
 func _on_animation_player_animation_started(anim_name: StringName) -> void:
