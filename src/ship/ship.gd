@@ -5,7 +5,7 @@ extends Node3D
 @export var fire : Node3D
 @export var healthbardisplay: Sprite3D
 
-var health : float = 100.0
+@export var health : float = 100.0
 var _fill_style:  StyleBoxFlat
 
 func _ready() -> void:

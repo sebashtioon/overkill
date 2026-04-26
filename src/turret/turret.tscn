@@ -346,7 +346,7 @@ bind/5/bone = -1
 bind/5/pose = Transform3D(0.27008355, 0, 0, 0, 0.27008355, -2.0390742e-08, 0, 2.0390742e-08, 0.27008355, 0.20142163, -0.61720735, -0.06878555)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_w4lck"]
-size = Vector3(0.05, 0.05, 52.016853)
+size = Vector3(0.05, 0.05, 119.00227)
 
 [sub_resource type="Animation" id="Animation_sabi0"]
 length = 0.001
@@ -529,7 +529,7 @@ texture = ExtResource("1_sabi0")
 transform = Transform3D(1, 0, 0, 0, 0.9981615, 0.060612917, 0, -0.060612917, 0.9981615, 0, -0.5298666, -0.12525523)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="head/camera/RaycastMimic" unique_id=1227536100]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9.536743e-07, -25.983427)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.2452087e-06, -59.476135)
 shape = SubResource("BoxShape3D_w4lck")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1736045972]

@@ -939,6 +939,7 @@ healthbardisplay = NodePath("healthbardisplay")
 [node name="healthbardisplay" type="Sprite3D" parent="." unique_id=1030472830]
 transform = Transform3D(5.965, 0, 0, 0, 5.965, 0, 0, 0, 5.965, 0, 4.3774486, 0.059242725)
 billboard = 1
+no_depth_test = true
 texture = SubResource("ViewportTexture_r6hs8")
 
 [node name="SubViewport" type="SubViewport" parent="." unique_id=659457298]
