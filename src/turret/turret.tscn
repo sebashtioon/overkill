@@ -362,15 +362,15 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_2webm"]
 resource_name = "ArmatureAction"
-length = 0.17
-step = 0.001
+length = 0.05
+step = 0.0001
 tracks/0/type = "position_3d"
 tracks/0/imported = true
 tracks/0/enabled = true
 tracks/0/path = NodePath("head/camera/Armature/Skeleton3D:Bone")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
-tracks/0/keys = PackedFloat32Array(0, 1, 0.22976348, -0.24325675, -0.030601226, 0.033333335, 1, 0.22976348, -0.24325675, -0.030601226, 0.08066667, 1, 0.22976348, -0.29039326, -0.03060123, 0.114, 1, 0.22976348, -0.29039326, -0.03060123, 0.16666667, 1, 0.22976348, -0.24325675, -0.030601226)
+tracks/0/keys = PackedFloat32Array(0, 1, 0.22976348, -0.24325675, -0.030601226, 0.0101, 1, 0.22976348, -0.24325675, -0.030601226, 0.016566671, 1, 0.22976348, -0.29039326, -0.03060123, 0.0276, 1, 0.22976348, -0.29039326, -0.03060123, 0.0457, 1, 0.22976348, -0.24325675, -0.030601226)
 tracks/1/type = "rotation_3d"
 tracks/1/imported = true
 tracks/1/enabled = true
@@ -396,6 +396,45 @@ _data = {
 &"RESET": SubResource("Animation_sabi0"),
 &"shoot": SubResource("Animation_2webm")
 }
+
+[sub_resource type="Gradient" id="Gradient_w4lck"]
+colors = PackedColorArray(1, 0, 0, 1, 1, 0.643137, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_xiuug"]
+gradient = SubResource("Gradient_w4lck")
+
+[sub_resource type="Curve" id="Curve_u1wjr"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.512887, 0.548638), 0.0, 0.0, 0, 0, Vector2(0.987113, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_3oqse"]
+curve = SubResource("Curve_u1wjr")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_stbwc"]
+emission_shape_scale = Vector3(2, 2, 2)
+emission_shape = 1
+emission_sphere_radius = 0.3
+spread = 0.0
+angular_velocity_min = -1.60933e-05
+angular_velocity_max = 90.0
+gravity = Vector3(0, 3.015, 0)
+scale_curve = SubResource("CurveTexture_3oqse")
+color_ramp = SubResource("GradientTexture1D_xiuug")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_py7r6"]
+blend_mode = 1
+depth_draw_mode = 1
+shading_mode = 0
+vertex_color_use_as_albedo = true
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_fu4e1"]
+material = SubResource("StandardMaterial3D_py7r6")
+size = Vector2(0.3, 0.3)
 
 [node name="turret" type="Node3D" unique_id=1030040815 node_paths=PackedStringArray("head", "camera", "turret", "animation_player", "shootdebounce", "blur")]
 script = ExtResource("1_82w8q")
@@ -497,5 +536,24 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+
+[node name="FireParticles" type="Node3D" parent="." unique_id=200109767]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.43231666, 1.3333251, -0.25684482)
+
+[node name="Flame" type="GPUParticles3D" parent="FireParticles" unique_id=1819840822]
+transform = Transform3D(0.195, 0, 0, 0, 0.195, 0, 0, 0, 0.195, -0.1483311, -0.20102239, 0.17414013)
+amount = 26
+lifetime = 0.76
+preprocess = 2.0
+process_material = SubResource("ParticleProcessMaterial_stbwc")
+draw_pass_1 = SubResource("QuadMesh_fu4e1")
+
+[node name="Flame2" type="GPUParticles3D" parent="FireParticles" unique_id=497602080]
+transform = Transform3D(0.195, 0, 0, 0, 0.195, 0, 0, 0, 1.2300379, 0.7387965, -0.8097441, -0.06877187)
+amount = 26
+lifetime = 0.76
+preprocess = 2.0
+process_material = SubResource("ParticleProcessMaterial_stbwc")
+draw_pass_1 = SubResource("QuadMesh_fu4e1")
 
 [connection signal="timeout" from="shootdebounce" to="." method="_on_shootdebounce_timeout"]
