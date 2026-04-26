@@ -78,6 +78,8 @@ func shoot(source: String = "unknown") -> void:
 		shake_rot(2.0, 0.07)
 		if shooting_at_ship:
 			shooting_at_ship.health -= 3
+		if shooting_boss:
+			PlayerGlobal.world.secret_ending()
 
 
 func _on_animation_player_animation_started(anim_name: StringName) -> void:
@@ -130,11 +132,16 @@ func _on_shootdebounce_timeout() -> void:
 
 var in_ship_hitbox : bool = true
 var shooting_at_ship : Node3D
+var shooting_boss : bool = false
 
 func _on_raycast_mimic_area_entered(area: Area3D) -> void:
 	if area.is_in_group(&"ship"):
 		shooting_at_ship = area.get_parent().get_parent()
+	if area.is_in_group(&"boss"):
+		shooting_boss = true
 
 func _on_raycast_mimic_area_exited(area: Area3D) -> void:
 	if area.is_in_group(&"ship"):
 		shooting_at_ship = null
+	if area.is_in_group(&"boss"):
+		shooting_boss = false

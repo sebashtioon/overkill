@@ -5,6 +5,7 @@ extends Control
 @export var endingcounter: Label
 
 func _ready() -> void:
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	if PlayerGlobal.got_ending == "GOOD":
 		title.text = "GOOD ENDING"
 		title_2.text = "you saved humanity from The Machine! wasnt that fun"

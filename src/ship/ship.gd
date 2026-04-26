@@ -5,12 +5,17 @@ extends Node3D
 @export var fire : Node3D
 @export var healthbardisplay: Sprite3D
 
+var shot_down : bool = false
+
 @export var health : float = 100.0:
 	set(value):
 		health = value
 		
-		if !Engine.is_editor_hint() and value == 0.0:
+		if !Engine.is_editor_hint() and value <= 0.0 and !shot_down:
+			shot_down = true
+			print("shot down")
 			PlayerGlobal.ships_shot += 1
+			print("ships shot down: " + str(PlayerGlobal.ships_shot))
 
 var _fill_style:  StyleBoxFlat
 
