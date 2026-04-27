@@ -1,22 +1,18 @@
 [gd_scene format=4 uid="uid://cpd6vq6n04ptc"]
 
 [ext_resource type="Script" uid="uid://cpxvl72kuplcu" path="res://src/boss/boss.gd" id="1_3kou8"]
-
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_wr645"]
-load_path = "res://.godot/imported/boss_Bearded_man.png-3765a7042dfbf3f73c9e6a0a94438b59.s3tc.ctex"
+[ext_resource type="Texture2D" uid="uid://bbjk3ickmuqf7" path="res://ast/models/characters/man_Bearded_man.png" id="2_0wgbl"]
+[ext_resource type="Texture2D" uid="uid://xhwyccsjlhxy" path="res://ast/models/characters/man_Picsart_25-07-03_22-47-08-331.png" id="2_trtgp"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kk2m8"]
 resource_name = "Face.008"
 cull_mode = 2
-albedo_texture = SubResource("CompressedTexture2D_wr645")
-
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_3kou8"]
-load_path = "res://.godot/imported/boss_Picsart_25-07-03_22-47-08-331.png-fc920aac8c95f4e2fb5f065f6d93dd36.s3tc.ctex"
+albedo_texture = ExtResource("2_0wgbl")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nfc2o"]
 resource_name = "Body.008"
 cull_mode = 2
-albedo_texture = SubResource("CompressedTexture2D_3kou8")
+albedo_texture = ExtResource("2_trtgp")
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_q0rsq"]
 resource_name = "boss_human"
