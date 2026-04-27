@@ -11,6 +11,7 @@ this game is about my [favourite song](https://www.youtube.com/watch?v=A8pOVirjG
 
 [itch.io page](https://sebashtioon.itch.io/overkill)
 
+----
 
 
-note: copilot _was_ used, only for converting a CRT effect shader i found on [godotshaders.com](https://godotshaders.com/) so it could be used for the whole screen except for specific textures.
+> note: copilot _was_ used, only for converting a CRT effect shader i found on [godotshaders.com](https://godotshaders.com/) so it could be used for the whole screen except for specific textures.
