@@ -16,6 +16,8 @@ var found_good_ending : bool = false
 var found_bad_ending : bool = false
 var found_secret_ending : bool = false
 
+var playingfromagainbutton : bool = false
+
 var ships_shot : int = 0:
 	set(value):
 		ships_shot = value

@@ -29,10 +29,13 @@ func _on_quitbtn_pressed() -> void:
 
 
 func _on_againbtn_pressed() -> void:
-	pass # Replace with function body.
+	PlayerGlobal.playingfromagainbutton = true
+	$blackoverlay.show()
+	await get_tree().create_timer(2.0).timeout
+	get_tree().change_scene_to_file("res://src/main/main.scn")
 
 
 func _on_titlebtn_pressed() -> void:
-	#$blackoverlay.show()
+	$blackoverlay.show()
 	await get_tree().create_timer(2.0).timeout
 	get_tree().change_scene_to_file("res://src/title/title.tscn")

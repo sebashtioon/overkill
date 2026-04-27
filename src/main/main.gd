@@ -5,10 +5,10 @@ extends Node3D
 @export var gametimer: Timer
 @export var turret: Node3D
 
+@export var start_animation: AnimationPlayer
 
 @export var timeleftbar: ProgressBar
 @export var timelefttext: Label
-
 
 @export var blackfade: ColorRect
 
@@ -17,13 +17,20 @@ func _process(_delta: float) -> void:
 
 func _ready() -> void:
 	PlayerGlobal.world = self
-	overkill.play(45.0)
-
-	#overkill.play(90.0)
 	
-	cinematic_cam.make_current()
 	var tween = get_tree().create_tween()
-	tween.tween_property(overkill, "volume_db", 0, 3.0).from(-80.0)
+	
+	if PlayerGlobal.playingfromagainbutton:
+		start_animation.seek(50.0)
+		overkill.play(45.0 + 50.0)
+		turret.make_camera_current()
+		tween.tween_property(overkill, "volume_db", 0, 3.0).from(-80.0)
+		var tweenfade = get_tree().create_tween()
+		tweenfade.tween_property(blackfade, "modulate", Color(1, 1, 1, 0), 2.0).from(Color(1, 1, 1, 1))
+	else:
+		overkill.play(45.0)
+		cinematic_cam.make_current()
+		tween.tween_property(overkill, "volume_db", 0, 3.0).from(-80.0)
 
 # shot all the ships in time
 func good_ending() -> void:
