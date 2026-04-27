@@ -12,11 +12,14 @@ config_version=5
 
 config/name="overkill"
 config/version="v1.1"
+config/tags=PackedStringArray("3d", "finished")
 run/main_scene="uid://d1h4dmw18tx2g"
 config/features=PackedStringArray("4.6", "Forward Plus")
 boot_splash/bg_color=Color(0, 0, 0, 1)
 boot_splash/show_image=false
 config/icon="uid://dviewg0sapo31"
+config/macos_native_icon="res://ast/other/branding/icon/overkill.icns"
+config/windows_native_icon="res://ast/other/branding/icon/icon.ico"
 
 [autoload]
 
