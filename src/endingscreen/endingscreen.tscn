@@ -95,11 +95,11 @@ vertical_alignment = 1
 
 [node name="stuff" type="Control" parent="." unique_id=1672468674]
 anchors_preset = 0
-offset_left = 2.0
-offset_top = 560.0
-offset_right = 181.0
-offset_bottom = 626.0
-scale = Vector2(1.2848781, 1.2848781)
+offset_left = 3.9999998
+offset_top = 524.0
+offset_right = 183.0
+offset_bottom = 590.0
+scale = Vector2(1.8273668, 1.8273668)
 
 [node name="text" type="Label" parent="stuff" unique_id=1160927747]
 layout_mode = 1
@@ -128,13 +128,13 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -30.350422
-offset_top = -18.212646
-offset_right = 191.64957
-offset_bottom = 6.7873535
+offset_left = -39.154327
+offset_top = -17.130165
+offset_right = 182.84564
+offset_bottom = 7.869835
 grow_horizontal = 2
 grow_vertical = 2
-scale = Vector2(0.23451549, 0.16649038)
+scale = Vector2(0.26445743, 0.18774717)
 theme_override_fonts/font = ExtResource("2_r0vnx")
 theme_override_font_sizes/font_size = 20
 text = "made in like 2 days"
