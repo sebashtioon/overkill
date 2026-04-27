@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://chq7iw3dw6o1d"
 path.s3tc="res://.godot/imported/Texture_Varie_baseColor.png-46ef054375d5ddb520f15a4eda799ef5.s3tc.ctex"
+path.etc2="res://.godot/imported/Texture_Varie_baseColor.png-46ef054375d5ddb520f15a4eda799ef5.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://ast/models/city/textures/Texture_Varie_baseColor.png"
-dest_files=["res://.godot/imported/Texture_Varie_baseColor.png-46ef054375d5ddb520f15a4eda799ef5.s3tc.ctex"]
+dest_files=["res://.godot/imported/Texture_Varie_baseColor.png-46ef054375d5ddb520f15a4eda799ef5.s3tc.ctex", "res://.godot/imported/Texture_Varie_baseColor.png-46ef054375d5ddb520f15a4eda799ef5.etc2.ctex"]
 
 [params]
 

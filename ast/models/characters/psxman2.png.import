@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://6n0jckytthhx"
 path.s3tc="res://.godot/imported/psxman2.png-381ab29f7318c8deb37cb411c64cbf26.s3tc.ctex"
+path.etc2="res://.godot/imported/psxman2.png-381ab29f7318c8deb37cb411c64cbf26.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://ast/models/characters/psxman2.png"
-dest_files=["res://.godot/imported/psxman2.png-381ab29f7318c8deb37cb411c64cbf26.s3tc.ctex"]
+dest_files=["res://.godot/imported/psxman2.png-381ab29f7318c8deb37cb411c64cbf26.s3tc.ctex", "res://.godot/imported/psxman2.png-381ab29f7318c8deb37cb411c64cbf26.etc2.ctex"]
 
 [params]
 
