@@ -1,5 +1,8 @@
 # overkill v1.1
-KILL THEM ALL
+<img width="2560" height="1080" alt="overkill banner" src="https://github.com/user-attachments/assets/2b08a33c-070c-46ba-a2a9-f0d800e68540" />
+
+
+## KILL THEM ALL
 
 for a [horizons game jam](https://itch.io/jam/horizons-orion) (theme "overkill") made in 2 days :)
 
