@@ -14,4 +14,4 @@ this game is about my [favourite song](https://www.youtube.com/watch?v=A8pOVirjG
 ----
 
 
-> note: copilot _was_ used, only for converting a CRT effect shader i found on [godotshaders.com](https://godotshaders.com/) so it could be used for the whole screen except for specific textures.
+> note: copilot _was_ used, only for converting a CRT effect shader i found on [godotshaders.com](https://godotshaders.com/) so it could be used for the whole screen except for specific textures. i couldve done this outside of the project tho but i didnt because idk
