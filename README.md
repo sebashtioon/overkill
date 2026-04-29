@@ -11,6 +11,17 @@ this game is about my [favourite song](https://www.youtube.com/watch?v=A8pOVirjG
 
 [itch.io page](https://sebashtioon.itch.io/overkill)
 
+## gameplay video
+
+
+
+https://github.com/user-attachments/assets/b200a750-0bd7-4162-a75f-a6db84846119
+
+
+
+
+
+
 ----
 
 
